@@ -1,0 +1,64 @@
+/* base.html header */
+.blog-header {
+  background: #ff8c00;       /* 주황색 배경 */
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* 본문 영역 여백 */
+.blog-container {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 0 15px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+/* 각 포스트 */
+.post {
+  margin-bottom: 40px;
+}
+
+/* 제목 스타일 */
+.post-title a, .post-title {
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;   /* 구글 폰트 로드시 가중치 맞춰주세요 */
+  color: #2c3e50;     /* 필요에 따라 색상 조정 */
+  text-decoration: none;
+}
+
+/* 날짜 스타일 */
+.post-meta {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+/* 이미지 스타일 */
+.intruder-image-list {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 20px auto;
+  border-radius: 8px;
+}
+
+/* 본문 텍스트 */
+.post-body {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* footer */
+.blog-footer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #aaa;
+  padding: 15px 0;
+}

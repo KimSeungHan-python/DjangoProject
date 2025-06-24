@@ -1,78 +1,33 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>My Blog</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        max-width: 700px;
-        margin: 40px auto;
-        padding: 0 20px;
-        background: #f9f9f9;
-        color: #333;
-      }
-      h1 {
-        text-align: center;
-        color: #2c3e50;
-      }
-      a {
-        color: #2980b9;
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-      ul {
-        list-style-type: none;
-        padding: 0;
-      }
-      li a {
-        display: block;
-        background: #fff;
-        margin: 10px 0;
-        padding: 15px 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        color: inherit;
-        text-decoration: none;
-        transition: background 0.2s;
-      }
-      li a:hover {
-        background: #e6f2ff;
-      }
-      small {
-        color: #888;
-        font-size: 0.9em;
-      }
-      .new-post-btn {
-        display: inline-block;
-        margin-bottom: 20px;
-        padding: 10px 15px;
-        background-color: #27ae60;
-        color: white;
-        border-radius: 5px;
-        font-weight: bold;
-        text-decoration: none;
-      }
-      .new-post-btn:hover {
-        background-color: #219150;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Posts</h1>
-    <a href="{% url 'post_new' %}" class="new-post-btn">+ New Post</a>
-    <ul>
-      {% for post in posts %}
-      <li>
-        <a href="{% url 'post_detail' post.pk %}">
-          {{ post.title }}<br />
-          <small>{{ post.created_at }}</small>
-        </a>
-      </li>
-      {% empty %}
-      <li>No posts yet.</li>
-      {% endfor %}
-    </ul>
-  </body>
-</html>
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  {# 1) 글쓰기 버튼: 리스트 페이지 맨 위에 항상 노출 #}
+  <p style="text-align: right; margin-bottom: 20px;">
+    <a href="{% url 'post_new' %}" class="new-post-btn">+ 새 글 쓰기</a>
+  </p>
+
+  {# 2) 포스트 목록 #}
+  {% if posts %}
+    {% for post in posts %}
+      <article class="post">
+  <h2 class="post-title">
+    <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
+  </h2>
+  <div class="post-meta">{{ post.published_date|date:"Y년 n월 j일 H:i" }}</div>
+  <!-- 삭제 링크 -->
+  <p>
+    <a href="{% url 'post_delete' post.pk %}" class="btn btn-sm btn-danger">삭제</a>
+  </p>
+  {% if post.image %}
+    <img src="{{ post.image.url }}" class="intruder-image-list" alt="{{ post.title }}">
+  {% endif %}
+  <div class="post-body">
+    {{ post.text|linebreaksbr }}
+  </div>
+</article>
+
+    {% endfor %}
+  {% else %}
+    <p>아직 작성된 포스트가 없습니다.</p>
+  {% endif %}
+{% endblock %}

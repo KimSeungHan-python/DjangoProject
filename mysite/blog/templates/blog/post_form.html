@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% comment %} <!DOCTYPE html>
 <html>
   <head>
     <title>New Post</title>
@@ -64,4 +64,15 @@
     </form>
     <a href="{% url 'post_list' %}">← Back to list</a>
   </body>
-</html>
+</html> {% endcomment %}
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  <h2>새 글 쓰기</h2>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">저장</button>
+  </form>
+  <a href="{% url 'post_list' %}">취소</a>
+{% endblock %}
